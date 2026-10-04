@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Demande d'Achat - Manuel Utilisateur Complet & Guide Technique</title>
+  <style>
+    @page {
+      size: A4 portrait;
+      margin: 10mm 10mm 12mm 10mm;
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: #0f172a;
+      background-color: #ffffff;
+      line-height: 1.45;
+      font-size: 12px;
+    }
+
+    .page {
+      width: 100%;
+      min-height: 265mm;
+      padding: 10px 5px;
+      page-break-after: always;
+      position: relative;
+    }
+
+    .page:last-child {
+      page-break-after: avoid;
+    }
+
+    /* Cover Page - Electric Blue Theme (#0084ff) */
+    .cover {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      text-align: center;
+      padding: 50px 20px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0084ff 100%);
+      color: #ffffff;
+      border-radius: 18px;
+      min-height: 260mm;
+    }
+
+    .cover-logo {
+      width: 84px;
+      height: 84px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px auto;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4);
+    }
+
+    .cover-title {
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 10px;
+      color: #ffffff;
+    }
+
+    .cover-subtitle {
+      font-size: 16px;
+      font-weight: 400;
+      color: #93c5fd;
+      max-width: 520px;
+      margin: 0 auto 30px auto;
+    }
+
+    .cover-badge {
+      display: inline-block;
+      padding: 6px 18px;
+      background: rgba(0, 132, 255, 0.25);
+      border: 1px solid rgba(147, 197, 253, 0.4);
+      color: #60a5fa;
+      border-radius: 9999px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+    }
+
+    .cover-meta {
+      width: 100%;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      padding-top: 20px;
+      display: flex;
+      justify-content: space-around;
+      text-align: left;
+    }
+
+    .cover-meta-item {
+      font-size: 11px;
+    }
+
+    .cover-meta-label {
+      color: #94a3b8;
+      text-transform: uppercase;
+      font-size: 9px;
+      letter-spacing: 0.5px;
+      margin-bottom: 3px;
+    }
+
+    .cover-meta-val {
+      font-weight: 600;
+      color: #f8fafc;
+    }
+
+    /* Section Headers */
+    .section-header {
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 8px;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-num {
+      background: #0084ff;
+      color: white;
+      width: 26px;
+      height: 26px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    /* Grid & Cards */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 14px;
+    }
+
+    .card-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-desc {
+      font-size: 11px;
+      color: #475569;
+    }
+
+    /* Status Badges with Inner Dots (Exact App Style) */
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 9999px;
+      font-size: 10px;
+      font-weight: 700;
+      border: 1px solid transparent;
+    }
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+    }
+
+    .sb-brouillon { background: #f1f5f9; color: #334155; border-color: #cbd5e1; }
+    .sb-brouillon .dot { background: #64748b; }
+
+    .sb-val-resp { background: #faf5ff; color: #6b21a8; border-color: #e9d5ff; }
+    .sb-val-resp .dot { background: #a855f7; }
+
+    .sb-val-dir { background: #f3e8ff; color: #581c87; border-color: #d8b4fe; }
+    .sb-val-dir .dot { background: #9333ea; }
+
+    .sb-attente { background: #fffbeb; color: #92400e; border-color: #fde68a; }
+    .sb-attente .dot { background: #f59e0b; }
+
+    .sb-cours { background: #eff6ff; color: #1e40af; border-color: #bfdbfe; }
+    .sb-cours .dot { background: #3b82f6; }
+
+    .sb-commandee { background: #e0e7ff; color: #3730a3; border-color: #c7d2fe; }
+    .sb-commandee .dot { background: #6366f1; }
+
+    .sb-finalisee { background: #ecfdf5; color: #065f46; border-color: #a7f3d0; }
+    .sb-finalisee .dot { background: #10b981; }
+
+    .sb-refusee { background: #fff1f2; color: #9f1239; border-color: #fecdd3; }
+    .sb-refusee .dot { background: #f43f5e; }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 18px;
+      font-size: 11px;
+    }
+
+    th {
+      background-color: #0f172a;
+      color: #ffffff;
+      font-weight: 700;
+      text-align: left;
+      padding: 8px 10px;
+      border-bottom: 2px solid #0084ff;
+    }
+
+    td {
+      padding: 8px 10px;
+      border-bottom: 1px solid #e2e8f0;
+      color: #334155;
+    }
+
+    tr:nth-child(even) td {
+      background-color: #f8fafc;
+    }
+
+    /* SVG UI Containers */
+    .svg-container {
+      width: 100%;
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 12px;
+      padding: 12px;
+      margin-bottom: 18px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PAGE 1: COVER PAGE -->
+  <div class="page">
+    <div class="cover">
+      <div>
+        <div class="cover-badge">Manuel Utilisateur & Guide d'Architecture Technique v1.0</div>
+        
+        <div class="cover-logo">
+          <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <path d="M16 10a4 4 0 0 1-8 0"></path>
+          </svg>
+        </div>
+
+        <h1 class="cover-title">Plateforme Demande d'Achat</h1>
+        <p class="cover-subtitle">Manuel Pratique d'Utilisation & Spécifications de la Solution de Réquisition et Validation Approvisionnement</p>
+      </div>
+
+      <div style="width: 100%; max-width: 500px; margin: 0 auto;">
+        <svg width="100%" height="160" viewBox="0 0 500 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="500" height="160" rx="12" fill="#0f172a" stroke="#1e293b"/>
+          
+          <!-- Step 1 -->
+          <rect x="15" y="55" width="85" height="50" rx="8" fill="#3b82f6" fill-opacity="0.2" stroke="#60a5fa"/>
+          <text x="57" y="77" fill="#60a5fa" font-size="9" font-weight="bold" text-anchor="middle">Demandeur</text>
+          <text x="57" y="91" fill="#93c5fd" font-size="8" text-anchor="middle">Saisie & Devis</text>
+
+          <path d="M 100 80 L 120 80" stroke="#60a5fa" stroke-width="2"/>
+
+          <!-- Step 2 -->
+          <rect x="125" y="55" width="100" height="50" rx="8" fill="#a855f7" fill-opacity="0.2" stroke="#c084fc"/>
+          <text x="175" y="77" fill="#c084fc" font-size="9" font-weight="bold" text-anchor="middle">Validation N1</text>
+          <text x="175" y="91" fill="#e9d5ff" font-size="8" text-anchor="middle">Manager Direct</text>
+
+          <path d="M 225 80 L 245 80" stroke="#c084fc" stroke-width="2"/>
+
+          <!-- Step 3 -->
+          <rect x="250" y="55" width="100" height="50" rx="8" fill="#9333ea" fill-opacity="0.2" stroke="#d8b4fe"/>
+          <text x="300" y="77" fill="#d8b4fe" font-size="9" font-weight="bold" text-anchor="middle">Validation N2</text>
+          <text x="300" y="91" fill="#f3e8ff" font-size="8" text-anchor="middle">Direction (DP/DGA)</text>
+
+          <path d="M 350 80 L 370 80" stroke="#d8b4fe" stroke-width="2"/>
+
+          <!-- Step 4 -->
+          <rect x="375" y="55" width="110" height="50" rx="8" fill="#10b981" fill-opacity="0.2" stroke="#34d399"/>
+          <text x="430" y="77" fill="#34d399" font-size="9" font-weight="bold" text-anchor="middle">Acheteur & BC</text>
+          <text x="430" y="91" fill="#a7f3d0" font-size="8" text-anchor="middle">Livraison & Solde</text>
+        </svg>
+      </div>
+
+      <div class="cover-meta">
+        <div class="cover-meta-item">
+          <div class="cover-meta-label">APPLICATION</div>
+          <div class="cover-meta-val">Demande d'Achat Portal</div>
+        </div>
+        <div class="cover-meta-item">
+          <div class="cover-meta-label">ARCHITECTURE</div>
+          <div class="cover-meta-val">React 18 + Express + MS SQL</div>
+        </div>
+        <div class="cover-meta-item">
+          <div class="cover-meta-label">ACCENT STYLE</div>
+          <div class="cover-meta-val">Bleu Électrique (#0084ff)</div>
+        </div>
+        <div class="cover-meta-item">
+          <div class="cover-meta-label">VERSION</div>
+          <div class="cover-meta-val">1.0 Production</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE 2: EXECUTIVE OVERVIEW & ROLES RBAC -->
+  <div class="page">
+    <div class="section-header">
+      <div class="section-title">
+        <div class="section-num">1</div>
+        <span>Présentation Générale & Matrice des Droits (RBAC)</span>
+      </div>
+      <span class="badge sb-cours"><span class="dot"></span>Aperçu Général</span>
+    </div>
+
+    <p style="margin-bottom: 14px; color: #334155;">
+      La plateforme <strong>Demande d'Achat</strong> automatise le processus d'acquisition d'équipements et fournitures. Elle assure la traçabilité complète des demandes d'achat depuis la saisie initiale par l'émetteur jusqu'à la validation hiérarchique N1, l'autorisation de direction N2, l'émission du Bon de Commande (BC) et le pointage des livraisons.
+    </p>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0084ff" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+          <span>Principales Fonctionnalités</span>
+        </div>
+        <ul style="padding-left: 16px; font-size: 11px; color: #475569;">
+          <li>Création de demandes multi-articles avec quantité et prix unitaire estimé.</li>
+          <li>Attachement de pièces jointes (offres de prix, devis PDF/Images).</li>
+          <li>Circuit séquentiel : Manager Direct (N1) ➔ Direction Spécifique (N2).</li>
+          <li>Délégation de pouvoir temporaire via le modal Intérim (<code>InterimModal.jsx</code>).</li>
+          <li>Traitement Acheteur : Fournisseur retenu, N° BC et pointage des quantités livrées.</li>
+          <li>Génération et impression de la fiche réglementaire 4 signatures (<code>PrintableRequest.jsx</code>).</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-title">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+          <span>Technologies & Frameworks</span>
+        </div>
+        <ul style="padding-left: 16px; font-size: 11px; color: #475569;">
+          <li><strong>Frontend:</strong> React 18, Vite, Tailwind CSS, Lucide Icons, i18next (FR/EN/AR).</li>
+          <li><strong>Backend API:</strong> Express.js avec authentification JWT et cryptage <code>bcryptjs</code>.</li>
+          <li><strong>Base de Données:</strong> Microsoft SQL Server (Connecteur <code>mssql</code> / <code>msnodesqlv8</code>).</li>
+          <li><strong>Administration:</strong> Panneau de configuration utilisateurs, départements & modal SQL.</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 style="font-size: 14px; font-weight: 700; margin: 16px 0 10px 0; color: #0f172a;">Matrice des Rôles & Autorisations (RBAC)</h3>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Fonctionnalité / Action</th>
+          <th style="text-align: center;">🧑‍💻 Demandeur</th>
+          <th style="text-align: center;">👔 Responsable N1</th>
+          <th style="text-align: center;">👔 Direction N2</th>
+          <th style="text-align: center;">🛒 Acheteur</th>
+          <th style="text-align: center;">🛠️ Admin</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Créer demande, articles & joindre devis</td>
+          <td style="text-align: center; color: #10b981; font-weight: bold;">✔ Oui</td>
+          <td style="text-align: center; color: #10b981; font-weight: bold;">✔ Oui</td>
+          <td style="text-align: center; color: #10b981; font-weight: bold;">✔ Oui</td>
+          <td style="text-align: center; color: #94a3b8;">Lecture seule</td>
+          <td style="text-align: center; color: #10b981; font-weight: bold;">✔ Oui</td>
+        </tr>
+        <tr>
+          <td>Approuver / Rejeter N1 (Responsable Direct)</td>
+          <td style="text-align: center; color: #cbd5e1;">✘ Non</td>
+          <td style="text-align: center; color: #10b981; font-weight: bold;">✔ Exclusif N1</td>
+          <td style="text-align: center; color: #cbd5e1;">✘ Non</td>
+          <td style="text-align: center; color: #cbd5e1;">✘ Non</td>
+          <td style="text-align: center; color: #10b981; font-weight: bold;">✔ Si délégué</td>
+        </tr>
+        <tr>
+          <td>Approuver / Rejeter N2 (Code Direction DP/DGA/DG)</td>
+          <td style="text-align: center; color: #cbd5e1;">✘ Non</td>
+          <td style="text-align: center; color: #cbd5e1;">✘ Non</td>
+          <td style="text-align: center; color: #10b981; font-weight: bold;">✔ Exclusif N2</td>
+          <td style="text-align: center; color: #cbd5e1;">✘ Non</td>
+          <td style="text-align: center; color: #10b981; font-weight: bold;">✔ Si habilité</td>
+        </tr>
+        <tr>
+          <td>Activer un Intérim (Délégation temporaire)</td>
+          <td style="text-align: center; color: #cbd5e1;">✘ Non</td>
+          <td style="text-align: center; color: #10b981; font-weight: bold;">✔ Oui</td>
+          <td style="text-align: center; color: #10b981; font-weight: bold;">✔ Oui</td>
+          <td style="text-align: center; color: #cbd5e1;">✘ Non</td>
+          <td style="text-align: center; color: #10b981; font-weight: bold;">✔ Oui</td>
+        </tr>
+        <tr>
+          <td>Prendre en charge (Acheteur) & Fournisseur</td>
+          <td style="text-align: center; color: #cbd5e1;">✘ Non</td>
+          <td style="text-align: center; color: #cbd5e1;">✘ Non</td>
+          <td style="text-align: center; color: #cbd5e1;">✘ Non</td>
+          <td style="text-align: center; color: #10b981; font-weight: bold;">✔ Exclusif</td>
+          <td style="text-align: center; color: #10b981; font-weight: bold;">✔ Oui</td>
+        </tr>
+        <tr>
+          <td>Saisir N° BC & Quantité Livrée</td>
+          <td style="text-align: center; color: #10b981; font-weight: bold;">✔ Pointage</td>
+          <td style="text-align: center; color: #cbd5e1;">✘ Non</td>
+          <td style="text-align: center; color: #cbd5e1;">✘ Non</td>
+          <td style="text-align: center; color: #10b981; font-weight: bold;">✔ Oui</td>
+          <td style="text-align: center; color: #10b981; font-weight: bold;">✔ Oui</td>
+        </tr>
+        <tr>
+          <td>Gérer Utilisateurs, Départements & Script SQL</td>
+          <td style="text-align: center; color: #cbd5e1;">✘ Non</td>
+          <td style="text-align: center; color: #cbd5e1;">✘ Non</td>
+          <td style="text-align: center; color: #cbd5e1;">✘ Non</td>
+          <td style="text-align: center; color: #cbd5e1;">✘ Non</td>
+          <td style="text-align: center; color: #10b981; font-weight: bold;">✔ Exclusif</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="card" style="background: #eff6ff; border-color: #bfdbfe;">
+      <div class="card-title" style="color: #1e40af;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1e40af" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+        <span>Système de Badges d'État à Pastilles Lumineuses</span>
+      </div>
+      <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px;">
+        <span class="status-badge sb-brouillon"><span class="dot"></span>Brouillon</span>
+        <span class="status-badge sb-val-resp"><span class="dot"></span>Validation Responsable</span>
+        <span class="status-badge sb-val-dir"><span class="dot"></span>Validation Direction</span>
+        <span class="status-badge sb-attente"><span class="dot"></span>En Attente</span>
+        <span class="status-badge sb-cours"><span class="dot"></span>En Cours</span>
+        <span class="status-badge sb-commandee"><span class="dot"></span>Commandée</span>
+        <span class="status-badge sb-finalisee"><span class="dot"></span>Finalisée</span>
+        <span class="status-badge sb-refusee"><span class="dot"></span>Refusée</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE 3: DEMANDEUR GUIDE & REQUISITION FORM MOCKUP -->
+  <div class="page">
+    <div class="section-header">
+      <div class="section-title">
+        <div class="section-num">2</div>
+        <span>Guide Demandeur : Formulaire de Saisie & Modal</span>
+      </div>
+      <span class="badge sb-cours"><span class="dot"></span>Portail Demandeur</span>
+    </div>
+
+    <!-- UI Mockup: CreateRequestModal -->
+    <div class="svg-container">
+      <svg width="100%" height="220" viewBox="0 0 650 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="650" height="220" rx="12" fill="#0f172a"/>
+        <!-- Header Window -->
+        <rect width="650" height="32" rx="12" fill="#1e293b"/>
+        <circle cx="16" cy="16" r="4.5" fill="#ef4444"/>
+        <circle cx="30" cy="16" r="4.5" fill="#f59e0b"/>
+        <circle cx="44" cy="16" r="4.5" fill="#10b981"/>
+        <text x="325" y="21" fill="#f8fafc" font-size="11" font-weight="bold" text-anchor="middle">Créer une Nouvelle Demande d'Achat - Formulaire Complète</text>
+
+        <!-- Form Top Inputs -->
+        <rect x="20" y="45" width="260" height="30" rx="6" fill="#334155"/>
+        <text x="30" y="64" fill="#94a3b8" font-size="10">Intitulé: Équipements de Sécurité Poste Usine</text>
+
+        <rect x="290" y="45" width="160" height="30" rx="6" fill="#334155"/>
+        <text x="300" y="64" fill="#94a3b8" font-size="10">Département: Production (DP)</text>
+
+        <rect x="460" y="45" width="170" height="30" rx="6" fill="#7f1d1d" stroke="#ef4444"/>
+        <text x="545" y="64" fill="#fca5a5" font-size="10" font-weight="bold" text-anchor="middle">⚡ Priorité : URGENTE</text>
+
+        <!-- Items Table -->
+        <rect x="20" y="85" width="610" height="85" rx="6" fill="#1e293b" stroke="#475569"/>
+        <line x1="20" y1="108" x2="630" y2="108" stroke="#475569"/>
+        <text x="30" y="101" fill="#38bdf8" font-size="9" font-weight="bold">Code Art.</text>
+        <text x="110" y="101" fill="#38bdf8" font-size="9" font-weight="bold">Désignation de l'article</text>
+        <text x="380" y="101" fill="#38bdf8" font-size="9" font-weight="bold">Quantité</text>
+        <text x="480" y="101" fill="#38bdf8" font-size="9" font-weight="bold">Prix Est. Unitaire</text>
+
+        <text x="30" y="125" fill="#f8fafc" font-size="9">1023254</text>
+        <text x="110" y="125" fill="#f8fafc" font-size="9">Membrane pour Clapet 15</text>
+        <text x="400" y="125" fill="#f8fafc" font-size="9">400 000</text>
+        <text x="500" y="125" fill="#f8fafc" font-size="9">12.50 DA</text>
+
+        <text x="30" y="148" fill="#f8fafc" font-size="9">1023880</text>
+        <text x="110" y="148" fill="#f8fafc" font-size="9">Joint d'Étanchéité Haute Pression</text>
+        <text x="400" y="148" fill="#f8fafc" font-size="9">50 000</text>
+        <text x="500" y="148" fill="#f8fafc" font-size="9">45.00 DA</text>
+
+        <!-- Submit Button -->
+        <rect x="470" y="180" width="160" height="30" rx="15" fill="#0084ff"/>
+        <text x="550" y="199" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle">Soumettre la Demande</text>
+      </svg>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">1. Saisie des Articles & Urgence</div>
+        <p class="card-desc">L'émetteur indique l'intitulé du besoin, sélectionne le département et choisit la priorité (Normale ou Urgente). Les lignes d'articles précisent le code article, la désignation, la quantité et le prix unitaire estimé.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-title">2. Pièces Jointes & Fichiers Devis</div>
+        <p class="card-desc">Chaque réquisition permet le téléchargement de documents justificatifs (offres de prix fournisseurs, fiches techniques PDF ou images), qui restent consultables par tous les valideurs du circuit.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE 4: VALIDEURS TIMELINE & INTERIM DELEGATION -->
+  <div class="page">
+    <div class="section-header">
+      <div class="section-title">
+        <div class="section-num">3</div>
+        <span>Guide Valideurs (N1/N2) & Gestion des Intérims</span>
+      </div>
+      <span class="badge sb-val-resp"><span class="dot"></span>Circuit d'Approbation</span>
+    </div>
+
+    <!-- UI Mockup: RequestDetailModal Timeline -->
+    <div class="svg-container">
+      <svg width="100%" height="220" viewBox="0 0 650 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="650" height="220" rx="12" fill="#ffffff" stroke="#cbd5e1"/>
+        <rect width="650" height="35" rx="12" fill="#f8fafc"/>
+        <text x="20" y="22" fill="#0f172a" font-size="12" font-weight="bold">Fiche Détail Demande N° 1023254/SENSUS/DP/2026</text>
+        <rect x="490" y="7" width="140" height="22" rx="11" fill="#f3e8ff" stroke="#d8b4fe"/>
+        <text x="560" y="22" fill="#581c87" font-size="9" font-weight="bold" text-anchor="middle">VALIDATION DIRECTION</text>
+
+        <!-- Vertical Timeline Line -->
+        <line x1="50" y1="55" x2="50" y2="185" stroke="#cbd5e1" stroke-width="2"/>
+
+        <!-- Event 1: Soumission -->
+        <circle cx="50" cy="65" r="9" fill="#10b981"/>
+        <path d="M 46 65 L 49 68 L 55 62" stroke="#ffffff" stroke-width="2"/>
+        <text x="75" y="64" fill="#0f172a" font-size="10" font-weight="bold">Créée par FERDJALLAH Salem (Production)</text>
+        <text x="75" y="76" fill="#64748b" font-size="9">08/03/2026 - 09:30 | Needs production year 2026</text>
+
+        <!-- Event 2: Validation N1 -->
+        <circle cx="50" cy="115" r="9" fill="#10b981"/>
+        <path d="M 46 115 L 49 118 L 55 112" stroke="#ffffff" stroke-width="2"/>
+        <text x="75" y="114" fill="#0f172a" font-size="10" font-weight="bold">Approuvée par Responsable N1 (BENALI Karim)</text>
+        <text x="75" y="126" fill="#64748b" font-size="9">08/03/2026 - 11:15 | "Validé. Matériel conforme au planning."</text>
+
+        <!-- Event 3: Pending N2 -->
+        <circle cx="50" cy="165" r="9" fill="#9333ea"/>
+        <text x="50" y="168" fill="#ffffff" font-size="9" font-weight="bold" text-anchor="middle">⌛</text>
+        <text x="75" y="164" fill="#0f172a" font-size="10" font-weight="bold">En attente Validation Direction (Direction DP)</text>
+        <text x="75" y="176" fill="#7e22ce" font-size="9">Intérimaire Actif : M. HAMDI Sofiane (Délégué pendant l'absence de M. le Directeur)</text>
+
+        <!-- Action Buttons -->
+        <rect x="400" y="180" width="100" height="28" rx="14" fill="#10b981"/>
+        <text x="450" y="197" fill="#ffffff" font-size="10" font-weight="bold" text-anchor="middle">✔ Approuver</text>
+
+        <rect x="515" y="180" width="115" height="28" rx="14" fill="#f43f5e"/>
+        <text x="572" y="197" fill="#ffffff" font-size="10" font-weight="bold" text-anchor="middle">✖ Rejeter / Refuser</text>
+      </svg>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">Circuit à 2 Niveaux (N1 & N2)</div>
+        <p class="card-desc">Le niveau N1 exige l'approbation du manager hiérarchique direct. Le niveau N2 consulte le code direction assigné (ex: Direction Production <code>DP</code>, Direction Générale <code>DG</code>) pour l'arbitrage budgétaire final.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Modal d'Intérim (InterimModal.jsx)</div>
+        <p class="card-desc">Chaque responsable peut désigner un collègue intérimaire sur une plage de dates précises. Les validations effectuées sous intérim sont enregistrées en base avec la traçabilité intégrale du nom du délégué.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE 5: ACHETEUR PORTAL & PRINTABLE REQUEST -->
+  <div class="page">
+    <div class="section-header">
+      <div class="section-title">
+        <div class="section-num">4</div>
+        <span>Guide Acheteur & Fiche d'Impression Officielle</span>
+      </div>
+      <span class="badge sb-commandee"><span class="dot"></span>Traitement Achats</span>
+    </div>
+
+    <!-- UI Mockup: PrintableRequest Layout -->
+    <div class="svg-container">
+      <svg width="100%" height="230" viewBox="0 0 650 230" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="650" height="230" rx="8" fill="#ffffff" stroke="#0084ff" stroke-width="2"/>
+        <!-- Sheet Header -->
+        <rect width="650" height="40" fill="#0f172a"/>
+        <text x="20" y="25" fill="#ffffff" font-size="14" font-weight="900">DEMANDE D'ACHAT</text>
+        <text x="450" y="25" fill="#60a5fa" font-size="11" font-weight="bold">Ref: N° 1023254/SENSUS/DP/2026</text>
+
+        <!-- Requisitioner Details -->
+        <rect x="15" y="48" width="620" height="30" rx="4" fill="#f8fafc" stroke="#e2e8f0"/>
+        <text x="25" y="66" fill="#334155" font-size="9">Date: 08/03/2026 | Demandeur: FERDJALLAH Salem | Département: Production | Type: Local</text>
+
+        <!-- Table -->
+        <rect x="15" y="85" width="620" height="65" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
+        <rect x="15" y="85" width="620" height="18" fill="#f1f5f9"/>
+        <text x="25" y="97" fill="#0f172a" font-size="8" font-weight="bold">N°</text>
+        <text x="50" y="97" fill="#0f172a" font-size="8" font-weight="bold">Code Article</text>
+        <text x="140" y="97" fill="#0f172a" font-size="8" font-weight="bold">Désignation</text>
+        <text x="400" y="97" fill="#0f172a" font-size="8" font-weight="bold">Quantité</text>
+        <text x="480" y="97" fill="#0f172a" font-size="8" font-weight="bold">Observations</text>
+
+        <text x="25" y="115" fill="#334155" font-size="8">1</text>
+        <text x="50" y="115" fill="#334155" font-size="8">1023254</text>
+        <text x="140" y="115" fill="#334155" font-size="8">Membrane pour Clapet 15.</text>
+        <text x="400" y="115" fill="#334155" font-size="8">400 000</text>
+        <text x="480" y="115" fill="#334155" font-size="8">Pour le besoin de production année 2026</text>
+
+        <!-- 4-Box Signatures Layout (Exact PrintableRequest.jsx layout) -->
+        <g transform="translate(15, 155)">
+          <rect width="145" height="60" rx="4" fill="#f8fafc" stroke="#cbd5e1"/>
+          <text x="72" y="16" fill="#0f172a" font-size="8" font-weight="bold" text-anchor="middle">Demandeur (Émetteur)</text>
+          <text x="72" y="32" fill="#64748b" font-size="7" text-anchor="middle">FERDJALLAH Salem</text>
+
+          <rect x="155" width="145" height="60" rx="4" fill="#f8fafc" stroke="#cbd5e1"/>
+          <text x="227" y="16" fill="#0f172a" font-size="8" font-weight="bold" text-anchor="middle">Responsable Direct (N1)</text>
+          <text x="227" y="32" fill="#10b981" font-size="7" font-weight="bold" text-anchor="middle">✔ Approuvé</text>
+
+          <rect x="310" width="145" height="60" rx="4" fill="#f8fafc" stroke="#cbd5e1"/>
+          <text x="382" y="16" fill="#0f172a" font-size="8" font-weight="bold" text-anchor="middle">Direction (N2 / DP)</text>
+          <text x="382" y="32" fill="#9333ea" font-size="7" font-weight="bold" text-anchor="middle">✔ Approuvé</text>
+
+          <rect x="465" width="155" height="60" rx="4" fill="#f8fafc" stroke="#cbd5e1"/>
+          <text x="542" y="16" fill="#0f172a" font-size="8" font-weight="bold" text-anchor="middle">Service Achat (Acheteur)</text>
+          <text x="542" y="32" fill="#0084ff" font-size="7" font-weight="bold" text-anchor="middle">Commandé / BC N° PO-8902</text>
+        </g>
+      </svg>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">1. Portail Acheteur & Affectation</div>
+        <p class="card-desc">L'acheteur consulte la file d'attente (<code>En Attente</code>), s'affecte la demande, renseigne le fournisseur retenu, saisit la référence du Bon de Commande (PO) et pointe les quantités livrées au fur et à mesure des réceptions.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-title">2. Impression Fiche Officielle</div>
+        <p class="card-desc">Accessible à tout moment via le bouton imprimer ou la route <code>/print/:id</code>. Génère un document au format paysage/portrait calibré pour une impression papier parfaite avec les 4 grilles de signature réglementaires.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE 6: ARCHITECTURE MS SQL SERVER & DIAGRAMME ERD -->
+  <div class="page">
+    <div class="section-header">
+      <div class="section-title">
+        <div class="section-num">5</div>
+        <span>Architecture MS SQL Server & Modèle de Données</span>
+      </div>
+      <span class="badge sb-brouillon"><span class="dot"></span>Modèle Relationnel</span>
+    </div>
+
+    <!-- UI Mockup: ERD Diagram -->
+    <div class="svg-container">
+      <svg width="100%" height="240" viewBox="0 0 650 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="650" height="240" rx="8" fill="#0f172a"/>
+        
+        <!-- Table Users -->
+        <rect x="20" y="20" width="160" height="95" rx="6" fill="#1e293b" stroke="#0084ff"/>
+        <rect x="20" y="20" width="160" height="22" rx="6" fill="#0084ff"/>
+        <text x="100" y="35" fill="#ffffff" font-size="10" font-weight="bold" text-anchor="middle">TABLE: Users</text>
+        <text x="30" y="55" fill="#94a3b8" font-size="9">🔑 UserID (PK)</text>
+        <text x="30" y="70" fill="#94a3b8" font-size="9">FullName, Email, Role</text>
+        <text x="30" y="85" fill="#94a3b8" font-size="9">DepartmentID, DirectorCode</text>
+        <text x="30" y="100" fill="#94a3b8" font-size="9">IsResponsable, ManagerID</text>
+
+        <!-- Connection -->
+        <path d="M 180 65 L 240 65" stroke="#0084ff" stroke-width="2"/>
+
+        <!-- Table Demandes -->
+        <rect x="240" y="20" width="180" height="110" rx="6" fill="#1e293b" stroke="#10b981"/>
+        <rect x="240" y="20" width="180" height="22" rx="6" fill="#10b981"/>
+        <text x="330" y="35" fill="#ffffff" font-size="10" font-weight="bold" text-anchor="middle">TABLE: Demandes</text>
+        <text x="250" y="55" fill="#94a3b8" font-size="9">🔑 RequestID (PK)</text>
+        <text x="250" y="70" fill="#94a3b8" font-size="9">RequestNumber, Title, Type</text>
+        <text x="250" y="85" fill="#94a3b8" font-size="9">DemandeurID (FK), Status</text>
+        <text x="250" y="100" fill="#94a3b8" font-size="9">Priority, TargetDirectorCode</text>
+        <text x="250" y="115" fill="#94a3b8" font-size="9">AcheteurID (FK), TotalEstPrice</text>
+
+        <!-- Connections down -->
+        <path d="M 330 130 L 330 160 L 180 160" stroke="#10b981" stroke-width="2"/>
+        <path d="M 330 130 L 330 160 L 480 160" stroke="#10b981" stroke-width="2"/>
+
+        <!-- Table LignesDemande -->
+        <rect x="20" y="140" width="170" height="85" rx="6" fill="#1e293b" stroke="#8b5cf6"/>
+        <rect x="20" y="140" width="170" height="22" rx="6" fill="#6d28d9"/>
+        <text x="105" y="155" fill="#ffffff" font-size="10" font-weight="bold" text-anchor="middle">TABLE: LignesDemande</text>
+        <text x="30" y="175" fill="#94a3b8" font-size="9">🔑 ItemID (PK)</text>
+        <text x="30" y="190" fill="#94a3b8" font-size="9">RequestID (FK), ItemCode</text>
+        <text x="30" y="205" fill="#94a3b8" font-size="9">ItemDescription, Quantity, DeliveredQty</text>
+
+        <!-- Table Validations & Interims -->
+        <rect x="470" y="140" width="160" height="85" rx="6" fill="#1e293b" stroke="#f59e0b"/>
+        <rect x="470" y="140" width="160" height="22" rx="6" fill="#d97706"/>
+        <text x="550" y="155" fill="#ffffff" font-size="10" font-weight="bold" text-anchor="middle">TABLE: Validations</text>
+        <text x="480" y="175" fill="#94a3b8" font-size="9">🔑 ValidationID (PK)</text>
+        <text x="480" y="190" fill="#94a3b8" font-size="9">RequestID (FK), ValidationStep</text>
+        <text x="480" y="205" fill="#94a3b8" font-size="9">ValidatorID, Action, Comments</text>
+      </svg>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">Moteur SQL Server & Maintenance</div>
+        <p class="card-desc">L'application s'appuie sur le driver <code>mssql</code> / <code>msnodesqlv8</code>. Le modal d'administration (<code>SqlModal.jsx</code>) fournit les requêtes d'inspection et de migration DDL pour la gestion du schéma.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Sécurité & Tokens JWT</div>
+        <p class="card-desc">Gestion des sessions sécurisée via jetons JWT transmis dans l'en-tête HTTP <code>Authorization: Bearer</code>. Mots de passe chiffrés en base via le protocole <code>bcryptjs</code>.</p>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
